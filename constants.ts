@@ -6,6 +6,27 @@ export const VIDEO_MODEL = 'veo-2.0-generate-preview';
 
 export const BASE_TEMPLATES: { id: string; name: string; description: string; config: TemplateConfig }[] = [
   {
+    id: 'nexthealth-original',
+    name: 'NextHealth Original',
+    description: 'Formato estándar NextHealth (40-55 palabras/página, 8 páginas)',
+    config: {
+      name: 'NextHealth Original',
+      protagonistas: 'Ana, una científica experta que explica con claridad, y Alex, un observador curioso que hace preguntas',
+      tono: 'científico pero accesible, educativo, narrativo con diálogo entre personajes',
+      rangoPaginas: { min: 8, max: 8 },
+      densidadPalabras: { min: 40, max: 55 },
+      idioma: 'español',
+      tebeo: {
+        estilo: 'Viñeta única estilo cómic educativo europeo, colores vibrantes, personajes expresivos en entornos científicos (laboratorios, pantallas, tecnología). Ana como científica profesional, Alex como observador atento. Escenas con elementos visuales del tema (microscopios, gráficos, dispositivos)',
+        instrucciones: 'Cada imagen muestra UNA escena de diálogo entre Ana explicando y Alex escuchando/preguntando. Fondos con elementos científicos relevantes al tema.',
+      },
+      brochure: {
+        estilo: 'Fotografía profesional estilo editorial científico, personas reales en entornos de laboratorio o clínicos, iluminación natural, composición tipo revista de divulgación científica',
+        instrucciones: '',
+      },
+    },
+  },
+  {
     id: 'minimal',
     name: 'Mínimo',
     description: 'Texto breve y conciso (30-60 palabras/página)',
@@ -91,7 +112,7 @@ export const BASE_TEMPLATES: { id: string; name: string; description: string; co
   },
 ];
 
-export const DEFAULT_TEMPLATE: TemplateConfig = BASE_TEMPLATES[1].config; // Normal por defecto
+export const DEFAULT_TEMPLATE: TemplateConfig = BASE_TEMPLATES[0].config; // NextHealth Original por defecto
 
 export const buildPromptsFromTemplate = (template: TemplateConfig, outputLanguage?: OutputLanguage): PromptSet => {
   const { min, max } = template.rangoPaginas;

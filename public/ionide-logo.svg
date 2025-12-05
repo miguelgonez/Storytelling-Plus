@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="90" viewBox="0 0 220 90" role="img" aria-labelledby="title desc">
+  <title id="title">ion IDe Telematics</title>
+  <desc id="desc">Logo for ion IDe Telematics</desc>
+  <rect x="10" y="18" width="90" height="54" rx="12" fill="#78acd7"/>
+  <text x="55" y="53" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" fill="#ffffff">ion</text>
+  <text x="110" y="55" font-family="Arial, sans-serif" font-size="48" font-weight="700" fill="#4a4a4a">IDe</text>
+  <text x="110" y="76" font-family="Arial, sans-serif" font-size="16" letter-spacing="5" fill="#4a4a4a">Telematics</text>
+</svg>

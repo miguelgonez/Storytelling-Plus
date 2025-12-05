@@ -4,22 +4,94 @@ export const TEXT_MODEL = 'gemini-3-pro-preview';
 export const IMAGE_MODEL = 'gemini-3-pro-image-preview';
 export const VIDEO_MODEL = 'veo-2.0-generate-preview';
 
-export const DEFAULT_TEMPLATE: TemplateConfig = {
-  name: 'NextHealth Storytelling',
-  protagonistas: 'Ana, una experta en salud, y Alex, un paciente curioso',
-  tono: 'informativo, empático y visualmente atractivo',
-  rangoPaginas: { min: 8, max: 8 },
-  densidadPalabras: { min: 70, max: 120 },
-  idioma: 'español',
-  tebeo: {
-    estilo: 'Viñetas amigables estilo tebeo español tradicional, personajes expresivos con líneas definidas, colores vibrantes y cálidos, burbujas de diálogo integradas, narrativa visual como los clásicos TBO',
-    instrucciones: '',
+export const BASE_TEMPLATES: { id: string; name: string; description: string; config: TemplateConfig }[] = [
+  {
+    id: 'minimal',
+    name: 'Mínimo',
+    description: 'Texto breve y conciso (30-60 palabras/página)',
+    config: {
+      name: 'Plantilla Mínima',
+      protagonistas: 'Un profesional de salud amigable',
+      tono: 'directo, claro y accesible',
+      rangoPaginas: { min: 4, max: 6 },
+      densidadPalabras: { min: 30, max: 60 },
+      idioma: 'español',
+      tebeo: {
+        estilo: 'Viñetas simples y coloridas, personajes amigables, diseño limpio tipo infografía visual',
+        instrucciones: '',
+      },
+      brochure: {
+        estilo: 'Fotografía profesional minimalista, mucho espacio en blanco, composición elegante',
+        instrucciones: '',
+      },
+    },
   },
-  brochure: {
-    estilo: 'Fotografía 2D profesional estilo banco de imágenes (stock photo), personas reales fotografiadas, iluminación natural de estudio, composición de folleto médico corporativo, estética de clínica privada premium. IMPORTANTE: Solo fotografía 2D plana, NO renderizado 3D, NO CGI, NO ilustraciones, NO estilo videojuego',
-    instrucciones: '',
+  {
+    id: 'normal',
+    name: 'Normal',
+    description: 'Densidad equilibrada (70-120 palabras/página)',
+    config: {
+      name: 'NextHealth Storytelling',
+      protagonistas: 'Ana, una experta en salud, y Alex, un paciente curioso',
+      tono: 'informativo, empático y visualmente atractivo',
+      rangoPaginas: { min: 6, max: 10 },
+      densidadPalabras: { min: 70, max: 120 },
+      idioma: 'español',
+      tebeo: {
+        estilo: 'Viñetas amigables estilo tebeo español tradicional, personajes expresivos con líneas definidas, colores vibrantes y cálidos, burbujas de diálogo integradas, narrativa visual como los clásicos TBO',
+        instrucciones: '',
+      },
+      brochure: {
+        estilo: 'Fotografía 2D profesional estilo banco de imágenes (stock photo), personas reales fotografiadas, iluminación natural de estudio, composición de folleto médico corporativo, estética de clínica privada premium',
+        instrucciones: '',
+      },
+    },
   },
-};
+  {
+    id: 'detailed',
+    name: 'Detallado',
+    description: 'Explicaciones completas (100-180 palabras/página)',
+    config: {
+      name: 'Guía Detallada de Salud',
+      protagonistas: 'Dr. García, especialista médico, y María, educadora de pacientes',
+      tono: 'educativo, detallado y profesional',
+      rangoPaginas: { min: 8, max: 15 },
+      densidadPalabras: { min: 100, max: 180 },
+      idioma: 'español',
+      tebeo: {
+        estilo: 'Estilo cómic educativo con paneles informativos, personajes profesionales, diseño tipo manual ilustrado',
+        instrucciones: '',
+      },
+      brochure: {
+        estilo: 'Fotografía editorial de alta calidad, estilo revista médica profesional, composición informativa',
+        instrucciones: '',
+      },
+    },
+  },
+  {
+    id: 'comprehensive',
+    name: 'Muy Detallado',
+    description: 'Máximo detalle (150-250 palabras/página)',
+    config: {
+      name: 'Manual Completo de Salud',
+      protagonistas: 'Equipo multidisciplinar de profesionales sanitarios',
+      tono: 'exhaustivo, científico pero accesible, muy informativo',
+      rangoPaginas: { min: 10, max: 20 },
+      densidadPalabras: { min: 150, max: 250 },
+      idioma: 'español',
+      tebeo: {
+        estilo: 'Estilo cómic técnico-educativo, rico en detalles, personajes profesionales diversos, diseño tipo guía ilustrada completa',
+        instrucciones: '',
+      },
+      brochure: {
+        estilo: 'Fotografía documental médica profesional, estilo libro de texto ilustrado, composición didáctica',
+        instrucciones: '',
+      },
+    },
+  },
+];
+
+export const DEFAULT_TEMPLATE: TemplateConfig = BASE_TEMPLATES[1].config; // Normal por defecto
 
 export const buildPromptsFromTemplate = (template: TemplateConfig, outputLanguage?: OutputLanguage): PromptSet => {
   const { min, max } = template.rangoPaginas;

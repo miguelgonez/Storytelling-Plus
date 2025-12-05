@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TemplateConfig } from '../types';
-import { DEFAULT_TEMPLATE } from '../constants';
+import { DEFAULT_TEMPLATE, BASE_TEMPLATES } from '../constants';
 
 interface TemplateManagerProps {
   isOpen: boolean;
@@ -172,6 +172,29 @@ export const TemplateManager: React.FC<TemplateManagerProps> = ({
             <form onSubmit={handleSave} className="space-y-4">
               {activeTab === 'general' && (
                 <>
+                  <div className="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-xl p-4 border border-teal-200">
+                    <div className="flex items-center gap-2 mb-3">
+                      <svg className="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                      </svg>
+                      <span className="font-bold text-teal-700">Cargar plantilla base</span>
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                      {BASE_TEMPLATES.map((baseTemplate) => (
+                        <button
+                          key={baseTemplate.id}
+                          type="button"
+                          onClick={() => setForm({ ...baseTemplate.config })}
+                          className="p-3 rounded-lg border-2 border-teal-200 bg-white hover:border-teal-400 hover:bg-teal-50 transition-all text-left"
+                        >
+                          <div className="font-semibold text-sm text-slate-800">{baseTemplate.name}</div>
+                          <div className="text-xs text-slate-500 mt-1">{baseTemplate.description}</div>
+                        </button>
+                      ))}
+                    </div>
+                    <p className="text-xs text-teal-600 mt-2">Selecciona una base y personaliza los campos a continuación</p>
+                  </div>
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <label className="flex flex-col text-sm font-semibold text-slate-700">
                       Nombre de la plantilla
